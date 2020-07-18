@@ -1,0 +1,85 @@
+Question {
+    "question":string
+    "type" : ["yes/no","wh"]
+    id_tache:integer,
+}
+
+TACHE {
+    type : "mission","enquete","sondage",
+    Titre : string,
+    Description : string
+    Nombre_Personne : integer
+    Prix_Par_Personne : float
+    id_entreprise : integer
+    type_de_preuve_de_validité : "memo","video","image","rien",
+    "tranche_age":string
+    "sexe":boolean
+    "Region":string,
+    "Domaine":string,
+    latitude:integer,
+    longitude:integer,
+    rayon:integer,
+    nbr_reponses_validé:integer,
+    image_tache:string,
+}
+
+UTILISATEUR MOUD {
+    profil_image,
+    Nom
+    Prenom
+    Email
+    Mdp
+    Region
+    Domaine
+    Notification
+    Money
+}
+
+Transaction {
+    "Montant_actuel":float
+    "Montant_pris":float
+    "MOntant_restant"
+    Type : ["ccp","flexy"],
+    Etat : "en attente","complété","annulé"
+    id_utilisateur
+}
+Reponse Oui/Non {
+    id_question:integer,
+    Reponse : boolean,
+    id_reponse:integer,
+}
+Reponse Wh {
+    id_question:integer,
+    reponse :string,
+    id_reponse:integer,
+}
+
+Reponse_TACHE : {
+    ID_TACHE :integer,
+    id_utilisateur:integer,
+    "etat":["en attente","accepté","refusé"],
+    "nom":string,
+    "Prenom":string,
+    "lieu_residence":string,
+    "tranche_age":string,
+    "situation_familiale":string
+    latitude:float,
+    longitude:float,
+    lien_preuve:string,
+    Nbr_validation:integer,
+}
+
+verification : {
+    id_reponse_tache:integer,
+    id_utilisateur:integer,
+    note:float,
+    commentaire:string,
+}
+
+entreprise : {
+    nom:string,
+    Email:string,
+    mdp:string,
+    Description:string,
+    Domaine:string,
+}
