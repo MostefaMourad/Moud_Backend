@@ -27,3 +27,11 @@ Route::prefix('entreprise')->group(function () {
     Route::get('/show/{id}', 'UtilisateurController@show');
     Route::delete('/delete/{id}', 'UtilisateurController@destroy');
  });
+
+ Route::prefix('tache')->group(function () {
+    Route::get('/', 'TacheController@index');
+    Route::post('/store', 'TacheController@store');
+    Route::get('/show/{id}', 'TacheController@show');
+    Route::patch('/update/{id}', 'TacheController@update');
+    Route::delete('/delete/{id}', 'TacheController@destroy');
+ });

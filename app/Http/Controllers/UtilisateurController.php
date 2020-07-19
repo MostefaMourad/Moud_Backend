@@ -45,5 +45,5 @@ class UtilisateurController extends Controller
                 return response()->json($response, 400);
             }
         }
-    }
+    }   
 }
