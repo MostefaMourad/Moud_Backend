@@ -83,3 +83,13 @@ entreprise : {
     Description:string,
     Domaine:string,
 }
+
+entreprise
+UTILISATEUR
+TACHE
+Reponse_TACHE
+question
+reponseon
+reponsewh
+Transaction
+verification

@@ -20,6 +20,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('mot_de_passe');
             $table->string('email');
             $table->string('domaine');
+            $table->string('logo');
         });
     }
 
