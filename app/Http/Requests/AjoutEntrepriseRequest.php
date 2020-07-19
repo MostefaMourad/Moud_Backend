@@ -13,7 +13,7 @@ class AjoutEntrepriseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class AjoutEntrepriseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nom' => 'required|string|unique:entreprises,nom',
+            'description' => 'required|string',
+            'email' => 'required|email|unique:entreprises,email',
+            'domaine' => 'required|string',
+            'telephone' => 'required|string',
+            'fax' => 'required|string',
+            'adresse' => 'required|string',
+            'logo' => 'nullable|image',
         ];
     }
 }

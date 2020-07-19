@@ -7,6 +7,8 @@ use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Else_;
 
 class EntrepriseController extends Controller
 {
@@ -19,16 +21,19 @@ class EntrepriseController extends Controller
 
     public function store(AjoutEntrepriseRequest $request)
     {
-        $new_entreprise = new Entreprise();
-        $new_entreprise->nom = $request->nom;
-        $new_entreprise->type = $request->type;
-        $new_entreprise->description = $request->description;
-        if($request->has('quantite')){
-            $new_entreprise->quantite = $request->quantite;
+        $input = $request->all();
+        $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
+        $password = substr($random, 0, 20);
+        $input['mot_de_passe'] = bcrypt($password);        
+        $input['pd'] = $password;
+        if($request->hasFile('logo')){
+            $path = Storage::putFile('EntreprisesLogos', $request->logo);
+            $input['logo'] = $path;
         }
-        else{
-            $new_entreprise->quantite = 0;
+        else {
+            $input['logo'] ="";
         }
+        $new_entreprise = Entreprise::create($input);
         $entreprise_save = $new_entreprise->save();
         if($entreprise_save){
             $response = APIHelpers::createAPIResponse(false, 201, 'Ajout avec succés',$new_entreprise);
@@ -58,14 +63,27 @@ class EntrepriseController extends Controller
             if($request->has('nom')) {
             $entreprise->nom = $request->nom;
             }
-            if($request->has('type')) {
-            $entreprise->type = $request->type;
+            if($request->has('email')) {
+            $entreprise->email = $request->email;
             }
             if($request->has('description')){
                 $entreprise->description = $request->description;
             }
-            if($request->has('quantite')){
-                $entreprise->quantite = $request->quantite;
+            if($request->has('domaine')){
+                $entreprise->domaine = $request->domaine;
+            }
+            if($request->has('telephone')) {
+                $entreprise->telephone = $request->telephone;
+            }
+            if($request->has('fax')){
+                $entreprise->fax = $request->fax;
+            }
+            if($request->has('adresse')){
+                $entreprise->adresse = $request->adresse;
+            }
+            if($request->hasFile('logo')){
+                $path = Storage::putFile('EntreprisesLogos', $request->logo);
+                $entreprise->logo = $path;
             }
             $entreprise_save = $entreprise->save();
             if ($entreprise_save) {

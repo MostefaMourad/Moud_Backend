@@ -18,8 +18,12 @@ class CreateEntreprisesTable extends Migration
             $table->string('nom');
             $table->string('description');
             $table->string('mot_de_passe');
+            $table->string('pd');
             $table->string('email');
             $table->string('domaine');
+            $table->string('telephone');
+            $table->string('fax');
+            $table->string('adresse');
             $table->string('logo');
         });
     }
