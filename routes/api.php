@@ -21,3 +21,9 @@ Route::prefix('entreprise')->group(function () {
     Route::patch('/update/{id}', 'EntrepriseController@update');
     Route::delete('/delete/{id}', 'EntrepriseController@destroy');
  });
+
+ Route::prefix('utilisateur')->group(function () {
+    Route::get('/', 'UtilisateurController@index');
+    Route::get('/show/{id}', 'UtilisateurController@show');
+    Route::delete('/delete/{id}', 'UtilisateurController@destroy');
+ });
