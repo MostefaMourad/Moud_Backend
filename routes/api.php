@@ -22,23 +22,31 @@ Route::prefix('entreprise')->group(function () {
     Route::delete('/delete/{id}', 'EntrepriseController@destroy');
  });
 
- Route::prefix('utilisateur')->group(function () {
+Route::prefix('utilisateur')->group(function () {
     Route::get('/', 'UtilisateurController@index');
     Route::get('/show/{id}', 'UtilisateurController@show');
     Route::delete('/delete/{id}', 'UtilisateurController@destroy');
  });
 
- Route::prefix('tache')->group(function () {
+Route::prefix('tache')->group(function () {
     Route::get('/', 'TacheController@index');
     Route::post('/store', 'TacheController@store');
     Route::get('/show/{id}', 'TacheController@show');
     Route::patch('/update/{id}', 'TacheController@update');
     Route::delete('/delete/{id}', 'TacheController@destroy');
  });
- Route::prefix('reponsetache')->group(function () {
+Route::prefix('reponsetache')->group(function () {
    Route::get('/', 'ReponseTacheController@index');
    Route::post('/store', 'ReponseTacheController@store');
    Route::get('/show/{id}', 'ReponseTacheController@show');
    Route::patch('/update/{id}', 'ReponseTacheController@update');
    Route::delete('/delete/{id}', 'ReponseTacheController@destroy');
+});
+
+Route::prefix('question')->group(function () {
+   Route::get('/', 'QuestionController@index');
+   Route::post('/store', 'QuestionController@store');
+   Route::get('/show/{id}', 'QuestionController@show');
+   Route::patch('/update/{id}', 'QuestionController@update');
+   Route::delete('/delete/{id}', 'QuestionController@destroy');
 });
