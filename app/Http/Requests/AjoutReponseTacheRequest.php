@@ -33,7 +33,7 @@ class AjoutReponseTacheRequest extends FormRequest
             'situation_familiale' => 'nullable|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'lien_preuve' => 'nullable|mimes:jpeg,bmp,png,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,application/octet-stream,audio/mpeg,mpga,mp3,wav',
+            'lien_preuve' => 'nullable|mimes:jpeg,bmp,png,flv,mp4,avi,wmv,m3u8,ts,3gp,avi,wmv,application/octet-stream,audio/mpeg,mpga,mp3,wav',
         ];
     }
 }

@@ -21,10 +21,11 @@ class ReponseTacheController extends Controller
     public function store(AjoutReponseTacheRequest $request)
     {
         $input = $request->all();
-        $input['etat'] = "en attente";      
+        $input['etat'] = "en attente";
         if($request->hasFile('lien_preuve')){
-            $path = Storage::putFile('ReponseTachePreuves', $request->logo);
+            $path = Storage::putFile('ReponseTachePreuves', $request->lien_preuve);
             $input['lien_preuve'] = $path;
+            dd($path);
         }
         else {
             $input['lien_preuve'] ="";
