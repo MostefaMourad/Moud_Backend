@@ -75,3 +75,11 @@ Route::prefix('transaction')->group(function () {
    Route::patch('/update/{id}','TransactionController@update');
    Route::delete('/delete/{id}','TransactionController@destroy');
 });
+
+Route::prefix('verification')->group(function () {
+   Route::get('/','VerificationController@index');
+   Route::post('/store','VerificationController@store');
+   Route::get('/show/{id}','VerificationController@show');
+   Route::patch('/update/{id}','VerificationController@update');
+   Route::delete('/delete/{id}','VerificationController@destroy');
+});
