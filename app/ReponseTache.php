@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ReponseTache extends Model
 {
     public $timestamps = false;
+    protected $fillable = [
+        'tache_id','utilisateur_id','nom','prenom','lieu_residence','age','situation_familiale','latitude','longitude','lien_preuve',
+    ];
     public function tache()
     {
         return $this->belongsTo('App\Tache');
