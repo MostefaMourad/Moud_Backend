@@ -59,3 +59,11 @@ Route::prefix('reponseon')->group(function () {
    Route::patch('/update/{id}', 'ReponseONController@update');
    Route::delete('/delete/{id}', 'ReponseONController@destroy');
 });
+
+Route::prefix('reponsewh')->group(function () {
+   Route::get('/','ReponseWHController@index');
+   Route::post('/store','ReponseWHController@store');
+   Route::get('/show/{id}','ReponseWHController@show');
+   Route::patch('/update/{id}','ReponseWHController@update');
+   Route::delete('/delete/{id}','ReponseWHController@destroy');
+});
