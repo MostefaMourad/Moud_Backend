@@ -17,7 +17,7 @@ class CreateEntreprisesTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('nom');
             $table->string('description');
-            $table->string('mot_de_passe');
+            $table->string('password');
             $table->string('pd');
             $table->string('email');
             $table->string('domaine');
@@ -25,6 +25,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('fax');
             $table->string('adresse');
             $table->string('logo');
+            $table->rememberToken();
         });
     }
 

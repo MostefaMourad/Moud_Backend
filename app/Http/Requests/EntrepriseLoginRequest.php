@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateVerificationRequest extends FormRequest
+class EntrepriseLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class UpdateVerificationRequest extends FormRequest
     public function rules()
     {
         return [
-            'valide' => 'nullable|boolean',
-            'commentaire' => 'nullable|string',
+            'email' => 'required|email|exists:entreprises,email',
+            'password' => 'required|min:6'
         ];
     }
 }

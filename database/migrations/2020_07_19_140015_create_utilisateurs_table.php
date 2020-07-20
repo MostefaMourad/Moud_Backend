@@ -19,11 +19,12 @@ class CreateUtilisateursTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('email')->unique();
-            $table->string('mot_de_passe');
+            $table->string('password');
             $table->string('region');
             $table->string('domaine');
             $table->boolean('notification')->default(true);
             $table->float('solde')->default(0);
+            $table->rememberToken();
         });
     }
 

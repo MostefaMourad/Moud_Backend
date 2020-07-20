@@ -26,8 +26,8 @@ class AjoutVerificationRequest extends FormRequest
         return [
             'utilisateur_id' => 'required|integer|exists:utilisateurs,id',
             'reponse_tache_id' => 'required|integer|exists:reponse_taches,id',
-            'note' => 'required|numeric|digits_between:0,10',
-            'commentaire' => 'required|string',
+            'valide' => 'required|boolean',
+            'commentaire' => 'nullable|string',
         ];
     }
 }

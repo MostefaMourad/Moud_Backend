@@ -14,6 +14,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/******************************Utilisateur Moud APIs  ***************************/
+
+Route::post('utilisateur/login', 'API\UtilisateurLoginController@login');
+Route::post('utilisateur/register', 'API\UtilisateurRegisterController@register');
+
+
+
+/****************************** Entreprise-Moud APIs  ***************************/
+
+Route::post('entreprise/login', 'API\EntrepriseLoginController@login');
+
+
+
+
+Route::group(['middleware' => 'auth:utilisateur-api'], function(){
+   Route::post('utilisateur/details', 'API\UtilisateurController@details');
+});
+
+Route::group(['middleware' => 'auth:entreprise-api'], function(){
+   Route::post('entreprise/details', 'API\EntrepriseController@details');
+});
+
+
+
+
+
+
+
+
+
 Route::prefix('entreprise')->group(function () {
     Route::get('/', 'EntrepriseController@index');
     Route::post('/store', 'EntrepriseController@store');

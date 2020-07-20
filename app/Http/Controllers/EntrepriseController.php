@@ -24,7 +24,7 @@ class EntrepriseController extends Controller
         $input = $request->all();
         $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
         $password = substr($random, 0, 20);
-        $input['mot_de_passe'] = bcrypt($password);        
+        $input['password'] = bcrypt($password);        
         $input['pd'] = $password;
         if($request->hasFile('logo')){
             $path = Storage::putFile('EntreprisesLogos', $request->logo);

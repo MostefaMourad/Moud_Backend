@@ -3,15 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
+    use HasApiTokens, Notifiable;
+
     public $timestamps = false;
     protected $fillable = [
-        'nom','prenom', 'email', 'mot_de_passe','region','domaine','image_profil',
+        'nom','prenom', 'email', 'password','region','domaine','image_profil',
     ];
     protected $hidden = [
-        'mot_de_passe',
+        'password','remember_token'
     ];
     public function reponses()
     {

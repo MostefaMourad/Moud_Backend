@@ -19,8 +19,8 @@ class CreateVerificationsTable extends Migration
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
             $table->integer('reponse_tache_id')->unsigned();
             $table->foreign('reponse_tache_id')->references('id')->on('reponse_taches');
-            $table->float('note');
-            $table->string('commentaire');
+            $table->boolean('valide');
+            $table->string('commentaire')->nullable();
         });
     }
 
