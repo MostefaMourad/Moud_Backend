@@ -67,3 +67,11 @@ Route::prefix('reponsewh')->group(function () {
    Route::patch('/update/{id}','ReponseWHController@update');
    Route::delete('/delete/{id}','ReponseWHController@destroy');
 });
+
+Route::prefix('transaction')->group(function () {
+   Route::get('/','TransactionController@index');
+   Route::post('/store','TransactionController@store');
+   Route::get('/show/{id}','TransactionController@show');
+   Route::patch('/update/{id}','TransactionController@update');
+   Route::delete('/delete/{id}','TransactionController@destroy');
+});
