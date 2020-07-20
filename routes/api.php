@@ -35,6 +35,7 @@ Route::prefix('tache')->group(function () {
     Route::patch('/update/{id}', 'TacheController@update');
     Route::delete('/delete/{id}', 'TacheController@destroy');
  });
+
 Route::prefix('reponsetache')->group(function () {
    Route::get('/', 'ReponseTacheController@index');
    Route::post('/store', 'ReponseTacheController@store');
@@ -49,4 +50,12 @@ Route::prefix('question')->group(function () {
    Route::get('/show/{id}', 'QuestionController@show');
    Route::patch('/update/{id}', 'QuestionController@update');
    Route::delete('/delete/{id}', 'QuestionController@destroy');
+});
+
+Route::prefix('reponseon')->group(function () {
+   Route::get('/', 'ReponseONController@index');
+   Route::post('/store', 'ReponseONController@store');
+   Route::get('/show/{id}', 'ReponseONController@show');
+   Route::patch('/update/{id}', 'ReponseONController@update');
+   Route::delete('/delete/{id}', 'ReponseONController@destroy');
 });
