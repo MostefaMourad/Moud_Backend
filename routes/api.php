@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('utilisateur/login', 'API\UtilisateurLoginController@login');
 Route::post('utilisateur/register', 'API\UtilisateurRegisterController@register');
 
-
+Route::group(['middleware' => 'auth:utilisateur-api'], function(){
+   Route::get('utilisateur/profil', 'API\UtilisateurController@profil');
+   Route::post('utilisateur/taches', 'API\UtilisateurController@profil');
+});
 
 /****************************** Entreprise-Moud APIs  ***************************/
 
