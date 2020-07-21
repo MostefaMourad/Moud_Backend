@@ -21,7 +21,10 @@ Route::post('utilisateur/register', 'API\UtilisateurRegisterController@register'
 
 Route::group(['middleware' => 'auth:utilisateur-api'], function(){
    Route::get('utilisateur/profil', 'API\UtilisateurController@profil');
-   Route::post('utilisateur/taches', 'API\UtilisateurController@profil');
+   Route::post('utilisateur/profil/update', 'API\UtilisateurController@update');
+   Route::get('utilisateur/taches', 'API\UtilisateurController@taches');
+   Route::get('utilisateur/tache/show/{id}', 'API\UtilisateurController@show');
+   Route::post('utilisateur/tache/reponse', 'API\UtilisateurController@store');
 });
 
 /****************************** Entreprise-Moud APIs  ***************************/

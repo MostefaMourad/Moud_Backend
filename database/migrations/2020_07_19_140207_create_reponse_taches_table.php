@@ -29,6 +29,7 @@ class CreateReponseTachesTable extends Migration
             $table->float('longitude');
             $table->string('lien_preuve')->nullable();
             $table->integer('nombre_validations')->default(0);
+            $table->string('domaine');  
         });
     }
 

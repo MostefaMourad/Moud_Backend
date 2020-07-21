@@ -8,7 +8,7 @@ class ReponseTache extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'tache_id','utilisateur_id','nom','prenom','lieu_residence','age','situation_familiale','latitude','longitude','lien_preuve',
+        'tache_id','utilisateur_id','nom','prenom','lieu_residence','age','situation_familiale','latitude','longitude','lien_preuve','domaine',
     ];
     public function tache()
     {
