@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth:utilisateur-api'], function(){
    Route::get('utilisateur/taches', 'API\UtilisateurController@taches');
    Route::get('utilisateur/tache/show/{id}', 'API\UtilisateurController@show');
    Route::post('utilisateur/tache/reponse', 'API\UtilisateurController@store');
+   Route::get('utilisateur/verifications', 'API\UtilisateurController@verifications');
+   Route::get('utilisateur/verification/show/{id}', 'API\UtilisateurController@showReponse');
+   Route::post('utilisateur/verification/store', 'API\UtilisateurController@storeValid');
 });
 
 /****************************** Entreprise-Moud APIs  ***************************/

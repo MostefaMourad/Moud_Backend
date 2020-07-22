@@ -5,11 +5,16 @@ namespace App\Http\Controllers\API;
 use App\Helpers\APIHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AjoutReponseRequest;
+use App\Http\Requests\AjoutVerificationRequest;
+use App\Http\Requests\AjoutVerRequest;
 use App\Http\Requests\UpdateProfilRequest;
 use App\Question;
+use App\ReponseON;
 use App\ReponseTache;
+use App\ReponseWH;
 use App\Tache;
 use App\Utilisateur;
+use App\Verification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -66,7 +71,7 @@ class UtilisateurController extends Controller
         $user = Auth::user();
         $taches = DB::table('taches')->where([['region_cible',$user->region],['domaine',$user->domaine]])->get();
         if($taches!=null){
-             $response = APIHelpers::createAPIResponse(false, 200, 'Maintenances Trouves', $taches);
+             $response = APIHelpers::createAPIResponse(false, 200, 'Taches Trouves', $taches);
              return response()->json($response, 200);
         }
         else{
@@ -104,8 +109,73 @@ class UtilisateurController extends Controller
         }
         $new_reponse_tache = ReponseTache::create($input);
         foreach ($input['reponses'] as $reponse) {
-            $question = Question::find($reponse->question_id);
+            $question = Question::find($reponse['question_id']);
+            if($question->type=="wh"){
+                $rep = new ReponseWH();
+                $rep->reponse = $reponse['reponse'];
+                $rep->question_id = $reponse['question_id'];
+                $rep->reponse_tache_id = $new_reponse_tache->id;
+                $rep->save();
+            }
+            else{
+                $rep = new ReponseON();
+                $rep->reponse =boolval($reponse['reponse']);
+                $rep->question_id = $reponse['question_id'];
+                $rep->reponse_tache_id = $new_reponse_tache->id;
+                $rep->save();
+            }
         }
+        $reponse_tache_save = $new_reponse_tache->save();
+        if($reponse_tache_save){
+            $response = APIHelpers::createAPIResponse(false, 201, 'Ajout avec succés',$new_reponse_tache);
+            return response()->json($response, 200);
+        }
+        else{
+            $response = APIHelpers::createAPIResponse(false, 201, 'Erreur de sauvguarde', null);
+            return response()->json($response, 201);
+        }
+    }
+    public function verifications() 
+    { 
+        $user = Auth::user();
+        $verifications = DB::table('reponse_taches')->where([['etat','en attente'],['domaine',$user->domaine],['utilisateur_id','<>',$user->id]])->get();
+        if($verifications!=null){
+            $taches = [];
+            $i=0;
+            foreach ($verifications as $verification) {
+                $taches[$i] = Tache::find($verification->tache_id);
+                $taches[$i]->reponse_id = $verification->id;
+                $i++;
+            }
+             $response = APIHelpers::createAPIResponse(false, 200, 'Taches Trouves', $taches);
+             return response()->json($response, 200);
+        }
+        else{
+             $response = APIHelpers::createAPIResponse(true, 400, 'echec', null);
+             return response()->json($response, 400);
+        }
+    }
+    public function showReponse($id)
+    {
+        $tache = ReponseTache::find($id);
+        $reponseson = $tache->reponseson;
+        $responsewh = $tache->reponseswh;
+        unset($tache->reponseson);
+        unset($tache->reponseswh);
+        $tache->reponses = $reponseson->concat($responsewh);
+        if ($tache == null) {
+            $response = APIHelpers::createAPIResponse(true, 204, 'tache introuvable', null);
+        } else {
+            $response = APIHelpers::createAPIResponse(false, 200, 'tache disponible', $tache);
+        }
+        return response()->json($response, 200);
+    }
+    public function storeValid(AjoutVerRequest $request)
+    {
+        $user = Auth::user(); 
+        $input = $request->all();
+        $input['utilisateur_id'] = $user->id;
+        $new_reponse_tache = Verification::create($input);
         $reponse_tache_save = $new_reponse_tache->save();
         if($reponse_tache_save){
             $response = APIHelpers::createAPIResponse(false, 201, 'Ajout avec succés',$new_reponse_tache);
