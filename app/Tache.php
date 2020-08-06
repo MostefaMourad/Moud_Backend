@@ -16,4 +16,8 @@ class Tache extends Model
     {
         return $this->hasMany('App\Question');
     }
+    public function reponsestache()
+    {
+        return $this->hasMany('App\ReponseTache');
+    }
 }

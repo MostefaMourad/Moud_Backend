@@ -43,10 +43,13 @@ Route::group(['middleware' => 'auth:utilisateur-api'], function(){
 
 Route::group(['middleware' => 'auth:entreprise-api'], function(){
    Route::post('entreprise/details', 'API\EntrepriseController@details');
+   Route::get('entreprise/taches', 'API\EntrepriseController@taches');
+   Route::get('entreprise/tache/{id}', 'API\EntrepriseController@tache');
 });
 
 
 
+/****************************** Admin-Moud APIs  ***************************/
 
 
 
